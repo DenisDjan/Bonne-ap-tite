@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="{% static 'js/drink.js' %}" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drink - Bonne Appétit</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url("{% static 'images/drink.png' %}") no-repeat center center fixed;
+            background-size: cover;
+            color: #fff; /* Changed text color to white */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 1.5rem;
+            font-size: 3rem;
+            color: #ff7e67;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8); /* Stronger shadow for readability */
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        table {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.1); /* Transparent table background */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            animation: slideIn 2s ease-out;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Light border for separation */
+        }
+
+        th {
+            background: rgba(255, 126, 103, 0.8); /* Semi-transparent header background */
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
+            font-size: 1.2rem;
+        }
+
+        td {
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.1); /* Transparent background for even rows */
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.2); /* Highlight on hover */
+            transform: scale(1.01);
+            transition: all 0.3s ease-in-out;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+            }
+
+            th, td {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.8rem 2rem;
+            background: #ff7e67;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .back-button:hover {
+            background: #ff9a9e;
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>Our Drink Menu</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Drink</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for drink in drinks %}
+            <tr>
+                <td>{{ drink.number }}</td>
+                <td>{{ drink.drink }}</td>
+                <td>{{ drink.drink_detail }}</td>
+                <td>${{ drink.price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'index' %}" class="back-button">Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bon Appétit</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            width: 220px; /* Slightly smaller width */
+            background: #333; /* Grey background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            width: 80px; /* Smaller logo */
+            margin-bottom: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        /* Buttons inside sidebar */
+        .sidebar .button {
+            width: 75%;
+            margin: 0.6rem 0; /* Adjusted spacing */
+            padding: 0.6rem; /* Smaller padding */
+            background: rgba(255, 255, 255, 0.9);
+            color: #ff7e67;
+            border: none;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 0.9rem; /* Slightly smaller font */
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .sidebar .button:hover {
+            background: #ff7e67;
+            color: #fff;
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 126, 103, 0.8);
+        }
+
+        /* Social icons */
+        .social-icons {
+            margin-top: auto;
+            display: flex;
+            gap: 0.8rem; /* Smaller spacing between icons */
+            justify-content: center;
+        }
+
+        .social-icons img {
+            width: 28px; /* Smaller size */
+            height: 28px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icons img:hover {
+            transform: scale(1.2);
+        }
+
+        /* Main content */
+        .main-content {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated background container */
+        .background-container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .background-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        /* Active background image */
+        .background-container img.active {
+            opacity: 1;
+        }
+
+        /* Floating text */
+        .floating-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .floating-text.active {
+            opacity: 1;
+        }
+
+        /* Media query for responsiveness */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 180px; /* Smaller width for mobile */
+            }
+
+            .logo {
+                width: 70px;
+            }
+
+            .sidebar .button {
+                font-size: 0.8rem;
+            }
+
+            .floating-text {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <a href="https://www.google.com/maps/place/%E1%9E%9F%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%A2%E1%9F%8A%E1%9E%BB%E1%9E%80%E1%9E%8F%E1%9E%B6%E1%9E%81%E1%9F%92%E1%9E%98%E1%9F%85/@11.4749671,104.9509036,20z/data=!4m6!3m5!1s0x3109597620933f09:0x2e8973fdd11a7773!8m2!3d11.4751085!4d104.9513125!16s%2Fg%2F11qsmwpvr5?entry=ttu&g_ep=EgoyMDI1MDEwOC4wIKXMDSoASAFQAw%3D%3D"><img src="{% static 'images/Logo.png' %}" alt="Bon Appétit Logo" class="logo"></a>
+
+        <button class="button" onclick="location.href='{% url 'menu' %}'">Appétit</button>
+        <button class="button" onclick="location.href='{% url 'drink' %}'">Boire</button>
+        <button class="button" onclick="location.href='{% url 'dessert' %}'">Dessert</button>
+        <button class="button" onclick="location.href='{% url 'wine' %}'">Vin</button>
+        <button class="button" onclick="location.href='{% url 'order' %}'">Food Order</button>
+        <button class="button" onclick="location.href='{% url 'about' %}'">About Us</button>
+        <button class="button" onclick="location.href='{% url 'contact' %}'">Contact Us</button>
+        <button class="button" onclick="location.href='{% url 'review' %}'">Review Us</button>
+        <div class="social-icons">
+            <a href="https://facebook.com" target="_blank"><img src="{% static 'images/fb-logo.png' %}" alt="Facebook"></a>
+            <a href="https://twitter.com" target="_blank"><img src="{% static 'images/twitter.png' %}" alt="Twitter"></a>
+            <a href="https://instagram.com" target="_blank"><img src="{% static 'images/ig.png' %}" alt="Instagram"></a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="background-container">
+            <img src="{% static 'images/index1.png' %}" alt="Background 1" class="active">
+            <img src="{% static 'images/index2.png' %}" alt="Background 2">
+            <img src="{% static 'images/index3.png' %}" alt="Background 3">
+            <img src="{% static 'images/index4.png' %}" alt="Background 4">
+        </div>
+        <div class="floating-text active" id="floatingText">Welcome to Bon Appétit!</div>
+    </main>
+
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>
